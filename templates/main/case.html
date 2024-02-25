@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'case/style.css' %}">
+  <title>Открытие кейса</title>
+</head>
+<body>
+  <div class="app">
+    <img class="pointer" src="{% static 'case/pointer.png' %}" alt="">
+    <div class="scope">
+      <ul class="list"></ul>
+    </div>
+    <button onclick="start()" class="start">Крутить</button>  
+  </div>
+  <script src="{% static 'JS/main.js' %}"></script>
+</body>
+</html>
