@@ -43,5 +43,5 @@ def choose_item(request):
 
 def get_items(request):
     items = Item.objects.all()
-    serialized_items = [{'name': item.name, 'img_url': item.img.url, 'chance': item.chance} for item in items]
+    serialized_items = [{'name': item.name, 'img_url': item.img.url} for item in items]
     return JsonResponse({'items': serialized_items})
