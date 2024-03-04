@@ -19,7 +19,7 @@ function loadItems() {
                 var li = document.createElement('li');
                 li.setAttribute('data-item', JSON.stringify(item.name));
                 li.classList.add('list__item');
-                li.innerHTML = '<img src="' + item.img_url + '" alt="' + item.name + '" />';
+                li.innerHTML = '<img src="' + item.img_url + '" alt="' + item.name + '" />' + '<p>' + item.name + '</p>';
                 list.appendChild(li);
             }
         } else {
