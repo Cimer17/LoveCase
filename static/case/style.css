@@ -16,7 +16,7 @@ body {
 
 .app {
   position: relative;
-  width: 650px;
+  width: 800px;
   background: #1b1f24;
   border-radius: 10px;
 }
@@ -45,9 +45,10 @@ body {
   justify-content: center;
   align-items: center;
   width: 200px;
-  height: 160px;
+  height: 200px;
   opacity: 0.5;
   transition: 0.3s ease;
+  margin-left: 4px;
 }
 
 .app .scope .list__item.active {
@@ -58,7 +59,7 @@ body {
 }
 .app .scope .list__item img {
   width: 80%;
-  height: 80%;
+  height: 60%;
   -o-object-fit: contain;
      object-fit: contain;
   transition: 0.3s ease;
@@ -72,7 +73,7 @@ body {
   border: none;
   border-radius: 5px;
   outline: none;
-  background: #eb5146;
+  background: #5D22A8;
   color: inherit;
   font-size: 16px;
   font-weight: 500;
@@ -94,4 +95,20 @@ body {
   font-size: 0.875rem;
   margin: 10px 0;
   text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+
+.case_im{
+    display: flex;
+    justify-content: center;
+}
+
+.title_case{
+  display:flex;
+  justify-content: center;
+  padding-bottom: 3%;
 }

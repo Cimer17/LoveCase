@@ -10,12 +10,18 @@
   <title>Открытие кейса</title>
 </head>
 <body>
-  <div class="app">
-    <img class="pointer" src="{% static 'case/pointer.png' %}" alt="">
-    <div class="scope">
-      <ul class="list"></ul>
+  <div class="conteiner_rullete">
+    <h1 class="title_case">ЛЮБОВНЫЙ</h1>
+    <div class="case_im">
+      <img class="case" src="../../media/case/new_free_4_1.webp" alt="case love">
     </div>
-    <button onclick="start()" class="start">Крутить</button>  
+    <div class="app">
+      <img class="pointer hidden" src="{% static 'case/pointer.png' %}" alt="">
+      <div class="scope hidden">
+        <ul class="list"></ul>
+      </div>
+      <button onclick="start()" class="start">ОТКРЫТЬ</button>  
+    </div>
   </div>
   <script src="{% static 'JS/main.js' %}"></script>
 </body>

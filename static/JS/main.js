@@ -47,6 +47,7 @@ function start() {
             
             // Получаем список элементов
             var list = document.querySelector('.list');
+
             
             var listItems = list.querySelectorAll('.list__item');
             listItems.forEach(function(item) {
@@ -69,15 +70,52 @@ function start() {
                 }
 
                 var li = list.querySelectorAll('li')[i];
+
+                var existingGradientClasses = li.className.match(/gradient_\d+/g);
+                if (existingGradientClasses) {
+                    existingGradientClasses.forEach(function(className) {
+                        li.classList.remove(className);
+                    });
+                }
+
+                var gradientClass;
+                switch (item.rare) {
+                    case 1:
+                        gradientClass = 'gradient_1';
+                        break;
+                    case 2:
+                        gradientClass = 'gradient_2';
+                        break;
+                    case 3:
+                        gradientClass = 'gradient_3';
+                        break;
+                    case 4:
+                        gradientClass = 'gradient_4';
+                        break;
+                    case 5:
+                        gradientClass = 'gradient_5';
+                        break;
+                    case 6:
+                        gradientClass = 'gradient_6';
+                        break;
+                    default:
+                        gradientClass = 'gradient_default'; // Если значение item.rare не соответствует ни одному из значений выше
+                }
+                li.classList.add('list__item', gradientClass);
                 li.setAttribute('data-item', JSON.stringify(item.name));
-                li.classList.add('gradient_' + item.rare);
                 li.innerHTML = '<img src="' + item.img_url + '" alt="' + item.name + '" />' + '<p>' + item.name + '</p>';
-    
             }
+
+
+            document.querySelector('.case').classList.add('hidden');
+            document.querySelector('.start').classList.add('hidden');
+            document.querySelector('.pointer').classList.remove('hidden');
+            document.querySelector('.scope').classList.remove('hidden');
             
             function transitionEndHandler() {
                 var item = list.querySelectorAll('li')[winnerIndex];
                 item.classList.add('active');
+                document.querySelector('.start').classList.remove('hidden');
             }
 
             // Применяем изменения к DOM перед запуском анимации
