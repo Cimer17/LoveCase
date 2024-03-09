@@ -35,13 +35,13 @@ def choose_item(request):
     if chosen_item:
         # Возвращаем победителя и все элементы
         items = Item.objects.all()
-        serialized_items = [{'name': item.name, 'img_url': item.img.url, 'chance': item.chance} for item in items]
-        return JsonResponse({'winner': {'name': chosen_item.name, 'img_url': chosen_item.img.url}, 'items': serialized_items})
+        serialized_items = [{'name': item.name, 'img_url': item.img.url, 'chance': item.chance, 'rare' : item.rare } for item in items]
+        return JsonResponse({'winner': {'name': chosen_item.name, 'img_url': chosen_item.img.url, 'rare' : chosen_item.rare}, 'items': serialized_items})
     else:
         return JsonResponse({'error': 'Failed to choose item'})
 
 
 def get_items(request):
     items = Item.objects.all()
-    serialized_items = [{'name': item.name, 'img_url': item.img.url} for item in items]
+    serialized_items = [{'name': item.name, 'img_url': item.img.url, 'rare' : item.rare} for item in items]
     return JsonResponse({'items': serialized_items})

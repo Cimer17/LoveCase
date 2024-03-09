@@ -85,3 +85,15 @@ body {
 .app .start:hover {
   opacity: 0.8;
 }/*# sourceMappingURL=style.css.map */
+
+.list__item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.list__item p{
+  font-size: 0.875rem;
+  margin: 10px 0;
+  text-align: center;
+}

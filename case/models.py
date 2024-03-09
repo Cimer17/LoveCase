@@ -21,9 +21,10 @@ class Item(models.Model):
     quantity = models.IntegerField(verbose_name='Количество:')
     chance = models.FloatField(default=0.0, verbose_name='Шанс выпадения:')
     case = models.ForeignKey(Case, related_name='items', on_delete=models.CASCADE, verbose_name='Из какого кейса:')
+    rare = models.IntegerField(choices=[(i, i) for i in range(1, 7)], verbose_name='Редкость', default=1)
 
     class Meta:
-        verbose_name = 'Предметы'
+        verbose_name = 'Предмет'
         verbose_name_plural = 'Предметы'
 
     def __str__(self):
