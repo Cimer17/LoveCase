@@ -26,59 +26,18 @@
                     <p>Самые лучшие призы</p>
                 </div>
                 <div class="caseContainer">
+                    {% for case in cases %}
                     <div class="box-Case">
                         <div class="img-Case">
-                            <img src="" alt="">
+                            <img class="img_case" src="{{ case.img_certificates.url }}" alt="{{ case.name }}">
                         </div>
-                        <p>любовный</p>
+                        <p>{{ case.name }}</p>
                         <div class="button_style">
-                            <button class="styles-button" type="submit">открыть</button>
-                        </div>
+                            <a href="/case/{{ case.id }}">
+                            <input class="styles-button" tupe="button" value="Открыть">  
+                            </a>                       
                     </div>
-                    <div class="box-Case">
-                        <div class="img-Case">
-                            <img src="" alt="">
-                        </div>
-                        <p>любовный</p>
-                        <div class="button_style">
-                            <button class="styles-button" type="submit">открыть</button>
-                        </div>
-                    </div>
-                    <div class="box-Case">
-                        <div class="img-Case">
-                            <img src="" alt="">
-                        </div>
-                        <p>любовный</p>
-                        <div class="button_style">
-                            <button class="styles-button" type="submit">открыть</button>
-                        </div>
-                    </div>
-                    <div class="box-Case">
-                        <div class="img-Case">
-                            <img src="" alt="">
-                        </div>
-                        <p>любовный</p>
-                        <div class="button_style">
-                            <button class="styles-button" type="submit">открыть</button>
-                        </div>
-                    </div>
-                    <div class="box-Case">
-                        <div class="img-Case">
-                            <img src="" alt="">
-                        </div>
-                        <p>любовный</p>
-                        <div class="button_style">
-                            <button class="styles-button" type="submit">открыть</button>
-                        </div>
-                    </div>
-                    <div class="box-Case">
-                        <div class="img-Case">
-                            <img src="" alt="">
-                        </div>
-                        <p>любовный</p>
-                        <div class="button_style">
-                            <button class="styles-button" type="submit">открыть</button>
-                        </div>
+                    {% endfor %}
                     </div>
                 </div>
                 <div class="style-text-case1">
@@ -95,55 +54,9 @@
                             <button class="styles-button" type="submit">открыть</button>
                         </div>
                     </div>
-                    <div class="box-Case">
-                        <div class="img-Case">
-                            <img src="" alt="">
-                        </div>
-                        <p>любовный</p>
-                        <div class="button_style">
-                            <button class="styles-button" type="submit">открыть</button>
-                        </div>
-                    </div>
-                    <div class="box-Case">
-                        <div class="img-Case">
-                            <img src="" alt="">
-                        </div>
-                        <p>любовный</p>
-                        <div class="button_style">
-                            <button class="styles-button" type="submit">открыть</button>
-                        </div>
-                    </div>
-                    <div class="box-Case">
-                        <div class="img-Case">
-                            <img src="" alt="">
-                        </div>
-                        <p>любовный</p>
-                        <div class="button_style">
-                            <button class="styles-button" type="submit">открыть</button>
-                        </div>
-                    </div>
-                    <div class="box-Case">
-                        <div class="img-Case">
-                            <img src="" alt="">
-                        </div>
-                        <p>любовный</p>
-                        <div class="button_style">
-                            <button class="styles-button" type="submit">открыть</button>
-                        </div>
-                    </div>
-                    <div class="box-Case">
-                        <div class="img-Case">
-                            <img src="" alt="">
-                        </div>
-                        <p>любовный</p>
-                        <div class="button_style">
-                            <button class="styles-button" type="submit">открыть</button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </main>
-
         {% include 'main/module/footer.html' %}
     </body>
 </html>

@@ -1,23 +1,27 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from .models import *
+from django.db.models import Sum
 import random
 
 def case_page(request, id):
     case = get_object_or_404(Case, id=id)
     items = Item.objects.all().order_by('-rare')
+    total_quantity = Item.objects.filter(case_id=id).aggregate(total_quantity=Sum('quantity'))['total_quantity']
     data = {
         'title': case.name.upper(),
         'img_case': case.img_certificates,
         'items' : items,
+        'case_items_count': total_quantity,
     }
     return render(request, 'main/case.html', context=data)
 
 def index(request):
-    return render(request, 'main/index.html')
-
-def cases(request):
-    return render(request, 'main/cases.html')
+    cases = Case.objects.all()
+    data = {
+        'cases' : cases,
+    }
+    return render(request, 'main/index.html', context=data)
 
 def choose_item(request):
     # Получаем все элементы с количеством больше 0
