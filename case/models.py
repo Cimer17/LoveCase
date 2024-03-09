@@ -10,6 +10,14 @@ class Case(models.Model):
         verbose_name = 'Кейс'
         verbose_name_plural = 'Кейсы'
 
+    def delete(self, *args, **kwargs):
+        # До удаления записи получаем необходимую информацию
+        storage, path = self.img_certificates.storage, self.img_certificates.path
+        # Удаляем сначала модель ( объект )
+        super(Case, self).delete(*args, **kwargs)
+        # Потом удаляем сам файл
+        storage.delete(path)
+
     def __str__(self):
         return self.name
     

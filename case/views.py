@@ -4,10 +4,17 @@ from .models import *
 from django.db.models import Sum
 import random
 
+def index(request):
+    cases = Case.objects.all()
+    data = {
+        'cases' : cases,
+    }
+    return render(request, 'main/index.html', context=data)
+
 def case_page(request, id):
     case = get_object_or_404(Case, id=id)
-    items = Item.objects.all().order_by('-rare')
-    total_quantity = Item.objects.filter(case_id=id).aggregate(total_quantity=Sum('quantity'))['total_quantity']
+    items = Item.objects.filter(case=id).order_by('-rare')
+    total_quantity = Item.objects.filter(case=id).aggregate(total_quantity=Sum('quantity'))['total_quantity']
     data = {
         'title': case.name.upper(),
         'img_case': case.img_certificates,
@@ -16,16 +23,10 @@ def case_page(request, id):
     }
     return render(request, 'main/case.html', context=data)
 
-def index(request):
-    cases = Case.objects.all()
-    data = {
-        'cases' : cases,
-    }
-    return render(request, 'main/index.html', context=data)
-
 def choose_item(request):
+    id = request.GET.get("id")
     # Получаем все элементы с количеством больше 0
-    items = Item.objects.filter(quantity__gt=0)
+    items = Item.objects.filter(case=id).filter(quantity__gt=0)
     if not items.exists():
         return JsonResponse({'error': 'No items available'})
     # Рассчитываем общий шанс для выбора элемента
@@ -45,7 +46,7 @@ def choose_item(request):
             break
     if chosen_item:
         # Возвращаем победителя и все элементы
-        items = Item.objects.all()
+        items = Item.objects.filter(case=id)
         serialized_items = [{'name': item.name, 'img_url': item.img.url, 'chance': item.chance, 'rare' : item.rare } for item in items]
         return JsonResponse({'winner': {'name': chosen_item.name, 'img_url': chosen_item.img.url, 'rare' : chosen_item.rare}, 'items': serialized_items})
     else:
@@ -53,6 +54,7 @@ def choose_item(request):
 
 
 def get_items(request):
-    items = Item.objects.all()
+    id = request.GET.get("id")
+    items = Item.objects.filter(case=id)
     serialized_items = [{'name': item.name, 'img_url': item.img.url, 'rare' : item.rare} for item in items]
     return JsonResponse({'items': serialized_items})

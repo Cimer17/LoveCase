@@ -1,12 +1,18 @@
 const cells = 31;
 
+function get_id_case(){
+    var url_text = String(document.location.pathname);
+    return url_text.slice(6, url_text.length - 1);
+}
+
+
 document.addEventListener('DOMContentLoaded', function() {
     loadItems();
 });
 
 function loadItems() {
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/get_items', true);
+    xhr.open('GET', `/get_items?id=${get_id_case()}`, true);
 
     xhr.onload = function() {
         if (xhr.status >= 200 && xhr.status < 400) {
@@ -42,7 +48,7 @@ function start() {
     audio.play();
     game.play();
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/choose_item', true);
+    xhr.open('GET', `/choose_item?id=${get_id_case()}`, true);
 
     xhr.onload = function() {
         if (xhr.status >= 200 && xhr.status < 400) {
