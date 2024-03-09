@@ -1,10 +1,17 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
-from .models import Item
+from .models import *
 import random
 
-def case_page(request):
-    return render(request, 'main/case.html')
+def case_page(request, id):
+    case = get_object_or_404(Case, id=id)
+    items = Item.objects.all().order_by('-rare')
+    data = {
+        'title': case.name.upper(),
+        'img_case': case.img_certificates,
+        'items' : items,
+    }
+    return render(request, 'main/case.html', context=data)
 
 def index(request):
     return render(request, 'main/index.html')

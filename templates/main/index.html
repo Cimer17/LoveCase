@@ -9,17 +9,10 @@
         <meta name="keywords" content="BIGPencil">
         <link rel="stylesheet" type="text/css" href="{% static 'css/style-button.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/stylesHome.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
     </head>
     <body>
-        <header class="top-menu">
-            <div class="style-header">
-                <p><b>big</b>Jackpot</p>
-                <div class="button_style" action="about/">
-                    <button id="button" class="style-buttons" type="submit">войти</button>
-                </div>
-            </div>
-        </header>
-
+        {% include 'main/module/header.html' %}
         <main class="styles-main">
             <div class="gif-box">
                 <p>фирменный кейс<br>большой джекпот</p>
@@ -151,38 +144,6 @@
             </div>
         </main>
 
-        <footer>
-            <div class="context">
-                <div class="infrormation">
-                    <div class="call">
-                        <div>
-                            <img src="" alt="">
-                        </div>
-                        <div>
-                            <p>9999</p>
-                            <p>Открыто кейсов</p>
-                        </div>
-                    </div>
-                    <div class="call">
-                        <div>
-                            <img src="" alt="">
-                        </div>
-                        <div>
-                            <p>9999</p>
-                            <p>Пользователей</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="link">
-                    <p><a>Пользовательское соглашение</a></p>
-                    <p><a>Контакты</a></p>
-                    <p><a>faq</a></p>
-                </div>
-            </div>
-            <div>
-                <img src="" alt="">
-            </div>
-        </footer>
+        {% include 'main/module/footer.html' %}
     </body>
-
 </html>

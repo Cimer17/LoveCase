@@ -1,0 +1,45 @@
+body{
+    margin: 0;
+}
+
+h1{
+    text-transform: uppercase;
+    color: white;
+}
+
+.top-menu{
+    display: flex;
+    justify-content: center;
+}
+
+.style-header{
+    position: fixed;
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 92%;
+    max-height: 80px;
+    height: 100%;
+    border-radius: 8px;
+    margin: 20px 0;
+    padding: 0 20px;
+    background-color: #04022a;
+}
+
+.style-header p{
+    color: #FFFFFF;
+    font-size: 1.5rem;
+}
+
+.style-header p b{
+    color: #ebf61b;
+    text-transform: uppercase;
+}
+
+.button_style {
+    max-height: 45px;
+    height: 100%;
+    max-width: 120px;
+    width: 100%;
+}

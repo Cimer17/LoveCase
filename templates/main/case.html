@@ -7,13 +7,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{% static 'case/style.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/rare.css' %}">
-  <title>Открытие кейса</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style-button.css' %}">
+  <title>{{ title }}</title>
 </head>
 <body>
+  <!-- {% include 'main/module/header.html' %} -->
   <div class="conteiner_rullete">
-    <h1 class="title_case">ЛЮБОВНЫЙ</h1>
+    <h1 class="title_case">{{ title }}</h1>
     <div class="case_im">
-      <img class="case" src="../../media/case/new_free_4_1.webp" alt="case love">
+      <img class="case" src="{{ img_case.url }}" alt="case love">
     </div>
     <div class="app">
       <img class="pointer hidden" src="{% static 'case/pointer.png' %}" alt="">
@@ -22,7 +25,29 @@
       </div>
       <button onclick="start()" class="start">ОТКРЫТЬ</button>  
     </div>
+    <div class="disply_items">
+      <div class='mini_title'>
+        <h2>Содержимое кейса</h2>
+      </div>
+      <div class="list_items_mini">
+        <ul class="list_new_items">
+          {% for item in items %}
+            <li data-item="{{ item.name }}" class="list__item gradient_{{ item.rare }}">
+              <div class="img_items">
+                <img class='img_card' src="{{ item.img.url }}" alt="{{ item.name }}">
+              </div>
+              <div class="title_items">
+                <p>{{ item.name }}</p>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+    </div> 
+    </div>
   </div>
+  <audio id="audio_open" src="{% static 'mp3/buttonclickrelease.mp3' %}" preload="auto"></audio>
+  <audio id="audio_open_start" src="{% static 'mp3/go-new-gambling.mp3' %}" preload="auto"></audio>
+  <audio id="audio_win" src="{% static 'mp3/win.mp3' %}" preload="auto"></audio>
   <script src="{% static 'JS/main.js' %}"></script>
 </body>
 </html>

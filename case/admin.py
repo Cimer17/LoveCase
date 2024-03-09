@@ -9,5 +9,4 @@ class ItemInline(admin.TabularInline):
 class CaseAdmin(admin.ModelAdmin):
     inlines = [ItemInline]
 
-admin.site.register(Item)
 admin.site.register(Case, CaseAdmin)

@@ -36,6 +36,11 @@ function loadItems() {
 }
 
 function start() {
+    var audio = document.getElementById("audio_open");
+    var game = document.getElementById("audio_open_start");
+    var win = document.getElementById('audio_win');
+    audio.play();
+    game.play();
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '/choose_item', true);
 
@@ -116,6 +121,7 @@ function start() {
                 var item = list.querySelectorAll('li')[winnerIndex];
                 item.classList.add('active');
                 document.querySelector('.start').classList.remove('hidden');
+                win.play()
             }
 
             // Применяем изменения к DOM перед запуском анимации
