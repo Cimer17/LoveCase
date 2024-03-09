@@ -27,5 +27,13 @@ class Item(models.Model):
         verbose_name = 'Предмет'
         verbose_name_plural = 'Предметы'
 
+    def delete(self, *args, **kwargs):
+        # До удаления записи получаем необходимую информацию
+        storage, path = self.img.storage, self.img.path
+        # Удаляем сначала модель ( объект )
+        super(Item, self).delete(*args, **kwargs)
+        # Потом удаляем сам файл
+        storage.delete(path)
+
     def __str__(self):
         return self.name

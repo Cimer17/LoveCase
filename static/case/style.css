@@ -130,6 +130,7 @@ body {
 }
 
 .list_new_items li {
+  height: 150px;
   width: 150px;
   padding: 10px; /* Добавляем отступы внутри элемента */
   margin: 10px; /* Добавляем отступы между элементами */
@@ -168,4 +169,10 @@ body {
   width: 100%;
   height: 100%;
   max-width: 300px;
+}
+
+.img_card{
+  width: 100%;
+  height: 100%;
+  max-height: 80px;
 }
