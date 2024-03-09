@@ -1,0 +1,32 @@
+/* .gradient, .gradient_6,
+.gradient_5,.gradient_4,
+.gradient_3,.gradient_2,
+.gradient_1{
+    width: 200px;
+    height: 200px;
+    border-radius: 8px;
+} */
+
+.gradient_6{
+    background: linear-gradient(0deg, #4fd3bf 0%, #0a4239 3.5%, #3dffe2 100%);
+}
+
+.gradient_5{
+    background: linear-gradient(0deg, #ff671d 0%, #753110 3%, #ff671d 100%);
+}
+
+/* .gradient_4{
+    background: linear-gradient(0deg, #8b1dff 0%, #3e0b73 3%, #8b1dff 100%);
+} */
+
+.gradient_3{
+    background: linear-gradient(0deg, #2d5eff 0%, #1336ab 2.5%, #2d5eff 100%);
+}
+
+.gradient_2{
+    background: linear-gradient(0deg, #30c114 0%, #207610 2%, #30c114 100%);
+}
+
+.gradient_1{
+    background: linear-gradient(0deg, #a9a9a9 0%, #4b4b4b 2.5%, #a9a9a9 100%);
+}
