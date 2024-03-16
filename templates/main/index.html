@@ -40,21 +40,27 @@
                     </div>
                     {% endfor %}
                 </div>
+                {% for category in categories %}
                 <div class="style-text-case1">
-                    <h1>популярные кейсы</h1>
-                    <p>Самые лучшие призы</p>
+                    <h1>{{ category.name }}</h1>
+                    <p>{{ category.title }}</p>
                 </div>
                 <div class="caseContainer">
+                    {% for case in category.cases.all %}
                     <div class="box-Case">
                         <div class="img-Case">
-                            <img src="" alt="">
+                            <img class="img_case" src="{{ case.img_certificates.url }}" alt="{{ case.name }}">
                         </div>
-                        <p>любовный</p>
+                        <p>{{ case.name }}</p>
                         <div class="button_style">
-                            <button class="styles-button" type="submit">открыть</button>
+                            <a href="/case/{{ case.id }}">
+                                <input class="styles-button" type="button" value="Открыть">  
+                            </a>                       
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
+                {% endfor %}
             </div>
         </main>
         {% include 'main/module/footer.html' %}

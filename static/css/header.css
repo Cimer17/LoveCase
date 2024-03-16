@@ -43,3 +43,7 @@ h1{
     max-width: 120px;
     width: 100%;
 }
+
+.home_link{
+    text-decoration : none;
+}
