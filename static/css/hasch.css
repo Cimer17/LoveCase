@@ -1,0 +1,13 @@
+.content_forms{
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10vh;
+}
+
+#result{
+    display: flex;
+    justify-content: center;
+}

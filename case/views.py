@@ -1,8 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from .models import *
+from case.urls import *
 from django.db.models import Sum
+from django.urls import reverse
 import random
+import hashlib
 
 def index(request):
     cases_popular = Case.objects.order_by('-id')[:6]
@@ -24,6 +27,8 @@ def case_page(request, id):
         'case_items_count': total_quantity,
     }
     return render(request, 'main/case.html', context=data)
+
+
 
 def choose_item(request):
     user = request.user
@@ -48,14 +53,21 @@ def choose_item(request):
             chosen_item.quantity -= 1 
             chosen_item.save()
             UserItem.objects.create(user=user, item=chosen_item) 
+            # Хешируем важные данные, связанные с выбором элемента, для обеспечения "доказуемой справедливости"
+            hash_data = f"{user.username}-{chosen_item.id}-{id}".encode()
+            hash_result = hashlib.md5(hash_data).hexdigest()
+            Game.objects.create(user=user, chosen_item_id=chosen_item.id, case_id=id, hash_value=hash_result)
+            link_hash = f'{reverse("index")}gethash/?hash={hash_result}&username={user}&chosen_item_id={chosen_item.id}&case_id={id}'
             break
+
     if chosen_item:
-        # Возвращаем победителя и все элементы
+        # Возвращаем победителя, все элементы и хеш данных
         items = Item.objects.filter(cases=id)
         serialized_items = [{'name': item.name, 'img_url': item.img.url, 'chance': item.chance, 'rare' : item.rare } for item in items]
-        return JsonResponse({'winner': {'name': chosen_item.name, 'img_url': chosen_item.img.url, 'rare' : chosen_item.rare}, 'items': serialized_items})
+        return JsonResponse({'winner': {'name': chosen_item.name, 'img_url': chosen_item.img.url, 'rare' : chosen_item.rare}, 'items': serialized_items, 'hash': hash_result, 'link_hash' : link_hash})
     else:
         return JsonResponse({'error': 'Failed to choose item'})
+
 
 
 def get_items(request):

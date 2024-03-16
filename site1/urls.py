@@ -12,6 +12,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('profile/', profile_view, name='profile'),
     path('register', RegisterView.as_view(), name="register"),
+    path('gethash/', gethash, name='gethash')
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

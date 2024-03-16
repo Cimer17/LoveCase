@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <title>Проверка хеша</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style-button.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/stylesHome.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/hasch.css' %}">
+</head>
+<body>
+    {% include 'main/module/header.html' %}
+    <div class="content_forms">
+        <h1>Проверка хеша</h1>
+        <form id="hashForm" method="get" action="/provablyfair/">
+            <label for="hash">Введите хеш:</label><br>
+            <input type="text" id="hash" name="hash"><br><br>
+            <label for="username">Имя пользователя:</label><br>
+            <input type="text" id="username" name="username"><br><br>
+            <label for="chosen_item_id">ID выбранного элемента:</label><br>
+            <input type="text" id="chosen_item_id" name="chosen_item_id"><br><br>
+            <label for="case_id">ID кейса:</label><br>
+            <input type="text" id="case_id" name="case_id"><br><br>
+            <input type="button" value="Проверить" onclick="checkHash()">
+        </form>
+    </div>
+    <div id="result"></div>
+
+    <script>
+        function checkHash() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/provablyfair/?' + new URLSearchParams(new FormData(document.getElementById('hashForm'))), true);
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 400) {
+                    var data = JSON.parse(xhr.responseText);
+                    var resultDiv = document.getElementById('result');
+                    if (data.result === 'OK') {
+                        resultDiv.innerHTML = 'Хеш верен';
+                    } else {
+                        resultDiv.innerHTML = 'Хеш неверен';
+                    }
+                } else {
+                    console.error('Ошибка запроса: ' + xhr.status);
+                }
+            };
+            xhr.onerror = function () {
+                console.error('Ошибка запроса');
+            };
+            xhr.send();
+        }
+
+        window.onload = function() {
+            var urlParams = new URLSearchParams(window.location.search);
+            document.getElementById('hash').value = urlParams.get('hash') || '';
+            document.getElementById('username').value = urlParams.get('username') || '';
+            document.getElementById('chosen_item_id').value = urlParams.get('chosen_item_id') || '';
+            document.getElementById('case_id').value = urlParams.get('case_id') || '';
+        };
+    </script>
+</body>
+</html>

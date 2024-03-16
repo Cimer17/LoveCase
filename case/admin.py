@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Case, Item, Category
+from .models import Case, Item, Category, Game
 
 class ItemInline(admin.TabularInline):
     model = Item.cases.through
@@ -17,3 +17,4 @@ class ItemAdmin(admin.ModelAdmin):
 admin.site.register(Case, CaseAdmin)
 admin.site.register(Item, ItemAdmin)
 admin.site.register(Category)
+admin.site.register(Game)

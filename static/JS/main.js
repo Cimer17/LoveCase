@@ -63,11 +63,10 @@ function start() {
             var data = JSON.parse(xhr.responseText);
             var winnerIndex = 15; // Индекс победителя
             var items = data.items;
-            
+
             // Получаем список элементов
             var list = document.querySelector('.list');
 
-            
             var listItems = list.querySelectorAll('.list__item');
             listItems.forEach(function(item) {
                 item.classList.remove('active');
@@ -77,7 +76,7 @@ function start() {
             list.style.transition = 'none';
             list.style.left = '0';
             list.style.transform = 'translate3d(0, 0, 0)';
-            
+
             for (var i = 0; i < 31; i++) {
                 var item;
                 if (i === winnerIndex) {
@@ -125,17 +124,26 @@ function start() {
                 li.innerHTML = '<img src="' + item.img_url + '" alt="' + item.name + '" />' + '<p>' + item.name + '</p>';
             }
 
-
             document.querySelector('.case').classList.add('hidden');
             document.querySelector('.start').classList.add('hidden');
             document.querySelector('.pointer').classList.remove('hidden');
             document.querySelector('.scope').classList.remove('hidden');
-            
+
             function transitionEndHandler() {
                 var item = list.querySelectorAll('li')[winnerIndex];
                 item.classList.add('active');
                 document.querySelector('.start').classList.remove('hidden');
-                win.play()
+                win.play();
+
+                // Обновляем или создаем ссылку на хеш
+                var hashLink = document.getElementById('hashLink');
+                if (hashLink) {
+                    hashLink.setAttribute('href', data.link_hash);
+                } else {
+                    var hashLinkContainer = document.createElement('div');
+                    hashLinkContainer.innerHTML = '<a  target="_blank" id="hashLink" href="' + data.link_hash + '">hash_link</a>';
+                    document.body.appendChild(hashLinkContainer);
+                }
             }
 
             // Применяем изменения к DOM перед запуском анимации
@@ -159,3 +167,6 @@ function start() {
 
     xhr.send();
 }
+
+
+
