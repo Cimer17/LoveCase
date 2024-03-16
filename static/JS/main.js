@@ -29,6 +29,14 @@ function loadItems() {
                 li.innerHTML = '<img src="' + item.img_url + '" alt="' + item.name + '" />' + '<p>' + item.name + '</p>';
                 list.appendChild(li);
             }
+            // Добавляем проверку на значение end и скрываем кнопку, если предметы закончились
+            if (data.end) {
+                document.querySelector('.start').classList.add('hidden');
+                document.querySelector('.case-ended-message').classList.remove('hidden');
+            } else {
+                document.querySelector('.start').classList.remove('hidden');
+                document.querySelector('.case-ended-message').classList.add('hidden');
+            }
         } else {
             console.error('Error:', xhr.status);
         }

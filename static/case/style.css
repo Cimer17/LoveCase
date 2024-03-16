@@ -21,7 +21,6 @@ body {
 .app {
   position: relative;
   width: 1022px;
-  background: #1b1f24;
   border-radius: 10px;
 }
 .app .pointer {
@@ -118,7 +117,7 @@ body {
 
 .disply_items{
   display: flex;
-  margin-top: 7%;
+  margin-top: 5%;
   flex-direction: column
 }
 
@@ -175,4 +174,12 @@ body {
   width: 100%;
   height: 100%;
   max-height: 80px;
+}
+
+.content_start{
+  display: flex;
+    justify-content: center;
+    margin-top: 26px;
+    font-size: 24px;
+    font-weight: 700;
 }

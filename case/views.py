@@ -30,7 +30,8 @@ def choose_item(request):
     # Получаем все элементы с количеством больше 0
     items = Item.objects.filter(cases=id).filter(quantity__gt=0)
     if not items.exists():
-        return JsonResponse({'error': 'No items available'})
+        # Если предметы закончились, возвращаем соответствующий ответ
+        return JsonResponse({'end': True})
     # Рассчитываем общий шанс для выбора элемента
     total_chance = sum(item.chance for item in items)
     # Генерируем случайное число в диапазоне от 0 до общего шанса
@@ -59,4 +60,6 @@ def get_items(request):
     id = request.GET.get("id")
     items = Item.objects.filter(cases=id)
     serialized_items = [{'name': item.name, 'img_url': item.img.url, 'rare' : item.rare} for item in items]
-    return JsonResponse({'items': serialized_items})
+    total = sum(item.quantity for item in items)
+    end = total == 0
+    return JsonResponse({'items': serialized_items, 'end' : end})
