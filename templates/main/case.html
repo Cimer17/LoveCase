@@ -24,8 +24,12 @@
         <ul class="list"></ul>
       </div>
         <div class="content_start">
-          <p class="case-ended-message hidden">Предметы в этом кейсе кончились!</p>
-          <button onclick="start()" class="start hidden">ОТКРЫТЬ</button>
+          {% if request.user.is_authenticated %}
+            <p class="case-ended-message hidden">Предметы в этом кейсе кончились!</p>
+            <button onclick="start()" class="start hidden">ОТКРЫТЬ</button>
+          {% else %}
+            <p class="not_user">Авторизуйтесь для открытия!</p>
+          {% endif %}
         </div>
     </div>
     <div class="disply_items">

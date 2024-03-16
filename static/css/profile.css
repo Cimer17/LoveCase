@@ -2,7 +2,7 @@ body{
     
     background-color:#B3E5FC;
     border-radius: 10px;
-
+    background-color:#212529 !important;
 }
 
 
@@ -10,7 +10,7 @@ body{
   width: 400px;
   border: none;
   border-radius: 10px;
-   
+  margin-top: 10vh;
   background-color: #fff;
 }
 
