@@ -26,6 +26,7 @@ def case_page(request, id):
     return render(request, 'main/case.html', context=data)
 
 def choose_item(request):
+    user = request.user
     id = request.GET.get("id")
     # Получаем все элементы с количеством больше 0
     items = Item.objects.filter(cases=id).filter(quantity__gt=0)
@@ -45,7 +46,8 @@ def choose_item(request):
             chosen_item = item
             # Уменьшаем количество предметов у победителя
             chosen_item.quantity -= 1 
-            chosen_item.save() 
+            chosen_item.save()
+            UserItem.objects.create(user=user, item=chosen_item) 
             break
     if chosen_item:
         # Возвращаем победителя и все элементы

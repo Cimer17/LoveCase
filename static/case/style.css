@@ -129,8 +129,8 @@ body {
 }
 
 .list_new_items li {
-  height: 150px;
-  width: 150px;
+  height: 180px;
+  width: 190px;
   padding: 10px; /* Добавляем отступы внутри элемента */
   margin: 10px; /* Добавляем отступы между элементами */
   box-sizing: border-box;
@@ -145,7 +145,7 @@ body {
 .list_items_mini{
   display: flex;
   width: 100%;
-  max-width: 1036px;
+  max-width: 1051px;
 }
 
 .title_items{
@@ -186,4 +186,10 @@ body {
 
 .case-ended-message{
   margin-top: 50px;
+}
+
+.info_case{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
