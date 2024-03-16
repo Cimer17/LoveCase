@@ -1,9 +1,17 @@
 {% load static %}
 <header class="top-menu">
     <div class="style-header">
-        <a href='/' class="home_link"><p><b>big</b>Jackpot</p></a>
-        <div class="button_style" action="about/">
-            <button id="button" class="style-buttons" type="submit">войти</button>
+        <a href="/" class="home_link"><p><b>big</b>Jackpot</p></a>
+        <div class="button_style">
+            {% if request.user.is_authenticated %}
+                <a href="{{ settings.SITE_URL }}profile/">
+                    <button id="button" class="style-buttons" type="button">{{ user.username }}</button> 
+                </a>
+            {% else %}
+                <a href="{% url 'login' %}">
+                    <button id="button" class="style-buttons" type="button">войти</button>  
+                </a>
+            {% endif %}
         </div>
     </div>
 </header>

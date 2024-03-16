@@ -63,3 +63,7 @@ def get_items(request):
     total = sum(item.quantity for item in items)
     end = total == 0
     return JsonResponse({'items': serialized_items, 'end' : end})
+
+
+def cases(request):
+    render(request, 'main/cases.html')

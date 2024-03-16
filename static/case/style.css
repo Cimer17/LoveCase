@@ -117,7 +117,7 @@ body {
 
 .disply_items{
   display: flex;
-  margin-top: 5%;
+  margin-top: 10vh;
   flex-direction: column
 }
 

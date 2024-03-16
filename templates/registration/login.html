@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'JS/login.js' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация</title>
+</head>
+<body>
+    <section class="container">
+        <div class="login-container">
+            <div class="circle circle-one"></div>
+            <div class="form-container">
+                <img src="https://raw.githubusercontent.com/hicodersofficial/glassmorphism-login-form/master/assets/illustration.png" alt="illustration" class="illustration" />
+                <h1 class="opacity">Войти</h1>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="text" name='username' placeholder="ИМЯ ПОЛЬЗОВАТЕЛЯ" />
+                    <input type="password" name='password' placeholder="ПАРОЛЬ" />
+                    <button class="opacity">Вперед</button>
+                </form>
+                <div class="register-forget opacity">
+                    <a href="{% url 'register' %}">Регистрация</a>
+                    <a href="">Забыл пароль</a>
+                </div>
+            </div>
+            <div class="circle circle-two"></div>
+        </div>
+        <div class="theme-btn-container"></div>
+    </section>
+</body>
+</html>
