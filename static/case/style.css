@@ -183,3 +183,7 @@ body {
     font-size: 24px;
     font-weight: 700;
 }
+
+.case-ended-message{
+  margin-top: 50px;
+}
