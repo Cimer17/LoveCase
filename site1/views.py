@@ -70,7 +70,7 @@ def send_message_to_telegram(request):
     user_items_conclusion_false = UserItem.objects.filter(user=user, conclusion=False)
     count_fal = user_items_conclusion_false.count()
     if count_fal == 0:
-        return HttpResponse("Нет предметов для вывода")
+        return JsonResponse({"error": "Нет предметов для вывода!"})
     # Создаем словарь для хранения количества каждого предмета
     items_count_dict = {}
     # Заполняем словарь количеством каждого предмета
@@ -89,4 +89,4 @@ def send_message_to_telegram(request):
         'items_list': items_list,  # Добавляем список предметов в данные для отправки в Telegram
     }
     send_news_to_telegram(data)
-    return HttpResponse("Сообщение отправлено")
+    return JsonResponse({"message": f"{user}, запрос на вывод предметов для отправлен!"})

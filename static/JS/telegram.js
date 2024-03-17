@@ -1,5 +1,4 @@
 document.getElementById("sendMessageBtn").addEventListener("click", function() {
-    console.log("Отправка запроса в Telegram...");
     // Выполняем AJAX-запрос для отправки сообщения
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "/send_message_to_telegram/", true);
@@ -11,20 +10,21 @@ document.getElementById("sendMessageBtn").addEventListener("click", function() {
 
     xhr.onload = function() {
         if (xhr.status >= 200 && xhr.status < 300) {
-            alert("Сообщение успешно отправлено в Telegram!");
+            var responseData = JSON.parse(xhr.responseText);
+            if ("error" in responseData) {
+                alert(responseData.error);
+            } else {
+                alert(responseData.message); // Вывод успешного сообщения
+            }
         } else {
-            alert("Произошла ошибка при отправке сообщения в Telegram.");
+            alert("Ошибка вывода!");
         }
     };
 
     xhr.onerror = function() {
-        alert("Произошла ошибка при выполнении запроса.");
+        alert("Ошибка вывода!");
     };
-
-    var data = JSON.stringify({
-        // Ваши данные для отправки в Telegram
-    });
-    xhr.send(data);
+    xhr.send();
 });
 
 // Функция для получения значения CSRF-токена из cookies

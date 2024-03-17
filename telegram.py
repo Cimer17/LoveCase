@@ -1,15 +1,19 @@
+from environs import Env
 import requests
 import html
 
+env = Env()  
+env.read_env()
+
 def get_token():
-    return '7179574801:AAEuYIguGopcPh8HzJwhvv2yOI349sUMV2s'
+    return env('TOKEN')
 
 def get_channel_id():
-    return '-1002083926678'
+    return env('CHANAL')
 
 def send_news_to_telegram(data):
-    description = html.unescape(data['message'])
-    bold_header = f"<b>{data['info']}</b>"
+    description = html.unescape(data['info'])
+    bold_header = f"<b>{data['message']}</b>"
     list_product = '\n'.join(data['items_list'])
     text = f"{bold_header}\n{description}\n{list_product}"
 
