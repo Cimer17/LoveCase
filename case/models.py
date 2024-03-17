@@ -1,6 +1,7 @@
 from django.db import models
 from django_resized import ResizedImageField
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
@@ -61,8 +62,17 @@ class Item(models.Model):
     
 
 class UserItem(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
+    item = models.ForeignKey(Item, on_delete=models.CASCADE, verbose_name='Предмет')
+    conclusion = models.BooleanField(default=False, verbose_name='Выведено')
+    received_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата получения') 
+
+    def __str__(self):
+        return f"{self.user.username} - {self.item.name}"
+    
+    class Meta:
+        verbose_name = 'Вывод пользователей'
+        verbose_name_plural = 'Выводы пользователей'
 
 
 class Game(models.Model):

@@ -4,6 +4,7 @@ from .models import *
 from case.urls import *
 from django.db.models import Sum
 from django.urls import reverse
+from django.shortcuts import redirect
 import random
 import hashlib
 
@@ -14,6 +15,8 @@ def index(request):
         'cases' : cases_popular,
         'categories' :categories,
     }
+    data['user_items'] = UserItem.objects.all().count()
+    data['user_count'] = User.objects.all().count()
     return render(request, 'main/index.html', context=data)
 
 def case_page(request, id):
@@ -26,6 +29,8 @@ def case_page(request, id):
         'items' : items,
         'case_items_count': total_quantity,
     }
+    data['user_items'] = UserItem.objects.all().count()
+    data['user_count'] = User.objects.all().count()
     return render(request, 'main/case.html', context=data)
 
 
@@ -80,4 +85,4 @@ def get_items(request):
 
 
 def cases(request):
-    render(request, 'main/cases.html')
+    return redirect('/')

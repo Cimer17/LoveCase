@@ -9,6 +9,7 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/rare.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/style-button.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/stylesHome.css' %}">
   <title>{{ title }}</title>
 </head>
 <body>
@@ -56,5 +57,6 @@
   <audio id="audio_open_start" src="{% static 'mp3/go-new-gambling.mp3' %}" preload="auto"></audio>
   <audio id="audio_win" src="{% static 'mp3/win.mp3' %}" preload="auto"></audio>
   <script src="{% static 'JS/main.js' %}"></script>
+  {% include 'main/module/footer.html' %}
 </body>
 </html>

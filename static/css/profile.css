@@ -44,3 +44,42 @@ body{
 .number3{
   font-weight:500;
 }
+
+.pouring {
+	font-size: 16px;
+	font-family: Verdana, sans-serif;
+	font-weight: 900;
+	position: relative;
+	background: white;
+	overflow: hidden;
+	text-transform: uppercase;
+	text-align: center;
+}
+.pouring:before {
+	content: '';
+	position: absolute;
+	filter: blur(10px);
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	mix-blend-mode: screen;
+	background-image: repeating-linear-gradient(-45deg, transparent, transparent 1em, #BFE2FF 1em, #337AB7 50%), repeating-linear-gradient(45deg, #337AB7, #337AB7 1em, #FFF 1em, #BFE2FF 50%);
+	background-size: 3em 3em, 2em 2em;
+	animation-name: ani;
+	animation-duration: 10s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+@keyframes ani {
+	from {
+		background-position: 0 0;
+	}
+	to {
+		background-position: 100% 0;
+	}
+}
+@media (max-width:690px) {	
+	.pouring {font-size: 12px;}	
+}
