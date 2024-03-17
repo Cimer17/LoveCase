@@ -19,7 +19,7 @@ def profile_view(request):
     paginator = Paginator(items, 16)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    user_items_count = items.count()
+    user_items_count = items.count()   
     total = user_items_count - user_items_conclusion_false
     data = {
         'total'  : total, 
@@ -29,7 +29,36 @@ def profile_view(request):
     }
     data['user_items'] = UserItem.objects.all().count()
     data['user_count'] = User.objects.all().count()
+    data['keys_count']= user.profile.keys_count
     return render(request, 'main/profile.html', context=data)
+
+@login_required
+def send_message_to_telegram(request):
+    user = request.user
+    # Получаем все объекты UserItem для данного пользователя с conclusion=False
+    user_items_conclusion_false = UserItem.objects.filter(user=user, conclusion=False)
+    count_fal = user_items_conclusion_false.count()
+    if count_fal == 0:
+        return JsonResponse({"error": "Нет предметов для вывода!"})
+    # Создаем словарь для хранения количества каждого предмета
+    items_count_dict = {}
+    # Заполняем словарь количеством каждого предмета
+    for user_item in user_items_conclusion_false:
+        item_name = user_item.item.name
+        items_count_dict[item_name] = items_count_dict.get(item_name, 0) + 1
+    # Формируем список строк для сообщения в телеграм
+    items_list = [f"{index + 1}. {name} - {count} шт." for index, (name, count) in enumerate(items_count_dict.items())]
+    user_items_conclusion_false.update(conclusion=True) 
+    # Формируем текст сообщения
+    message = f'Вывод для пользователя {user}'
+    info = f'Количество предметов - {count_fal}'
+    data = {
+        'message': message,
+        'info': info,
+        'items_list': items_list,  # Добавляем список предметов в данные для отправки в Telegram
+    }
+    send_news_to_telegram(data)
+    return JsonResponse({"message": f"{user}, запрос на вывод предметов для отправлен!"})
 
 class RegisterView(FormView):
     form_class = RegisterForm
@@ -62,31 +91,3 @@ def provably_fair(request):
             return JsonResponse({'error': 'Не все параметры переданы'})
     else:
         return JsonResponse({'error': 'Неверный метод запроса'})
-    
-@login_required
-def send_message_to_telegram(request):
-    user = request.user
-    # Получаем все объекты UserItem для данного пользователя с conclusion=False
-    user_items_conclusion_false = UserItem.objects.filter(user=user, conclusion=False)
-    count_fal = user_items_conclusion_false.count()
-    if count_fal == 0:
-        return JsonResponse({"error": "Нет предметов для вывода!"})
-    # Создаем словарь для хранения количества каждого предмета
-    items_count_dict = {}
-    # Заполняем словарь количеством каждого предмета
-    for user_item in user_items_conclusion_false:
-        item_name = user_item.item.name
-        items_count_dict[item_name] = items_count_dict.get(item_name, 0) + 1
-    # Формируем список строк для сообщения в телеграм
-    items_list = [f"{index + 1}. {name} - {count} шт." for index, (name, count) in enumerate(items_count_dict.items())]
-    user_items_conclusion_false.update(conclusion=True) 
-    # Формируем текст сообщения
-    message = f'Вывод для пользователя {user}'
-    info = f'Количество предметов - {count_fal}'
-    data = {
-        'message': message,
-        'info': info,
-        'items_list': items_list,  # Добавляем список предметов в данные для отправки в Telegram
-    }
-    send_news_to_telegram(data)
-    return JsonResponse({"message": f"{user}, запрос на вывод предметов для отправлен!"})

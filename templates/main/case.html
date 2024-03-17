@@ -26,8 +26,12 @@
       </div>
         <div class="content_start">
           {% if request.user.is_authenticated %}
-            <p class="case-ended-message hidden">Предметы в этом кейсе кончились!</p>
-            <button onclick="start()" class="start hidden">ОТКРЫТЬ</button>
+            {% if keys_count == 0 %}
+              <p class="case-none">У вас нет ключей!</p>
+            {% else %}
+              <p class="case-ended-message hidden">Предметы в этом кейсе кончились!</p>
+              <button onclick="start()" class="start hidden">ОТКРЫТЬ</button>
+            {% endif %}
           {% else %}
             <p class="not_user">Авторизуйтесь для открытия!</p>
           {% endif %}

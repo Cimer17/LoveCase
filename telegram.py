@@ -26,3 +26,17 @@ def send_news_to_telegram(data):
         return response.json()
     except requests.exceptions.RequestException as error:
         return f"Ошибка отправки сообщения: {error}"
+    
+def send_activate_promo(data):
+    title = f"<b>{data['title']}</b>"
+    message = html.unescape(data['message'])
+    text = f"{title}\n{message}"
+    try:
+        response = requests.post(
+            url=f'https://api.telegram.org/bot{get_token()}/sendMessage',
+            json={'chat_id': get_channel_id(), 'text': text, 'parse_mode': 'HTML'}
+        )
+        response.raise_for_status()
+        return response.json()
+    except requests.exceptions.RequestException as error:
+        return f"Ошибка отправки сообщения: {error}"

@@ -38,12 +38,22 @@ h1{
 }
 
 .button_style {
+    display: flex;
     max-height: 45px;
     height: 100%;
-    max-width: 120px;
     width: 100%;
+    justify-content: center;
 }
 
+.style_1{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.style_key{
+    margin: 1.5rem;
+}
 .home_link{
     text-decoration : none;
+    width: 100%;
 }

@@ -2,8 +2,12 @@
 <header class="top-menu">
     <div class="style-header">
         <a href="/" class="home_link"><p><b>big</b>Jackpot</p></a>
-        <div class="button_style">
+        <div class="button_style style_1">
             {% if request.user.is_authenticated %}
+                <p class="style_key">Ключи: {{ keys_count }} шт.</p>
+                <a href="{{ settings.SITE_URL }}/paymants/">
+                    <button id="button" class="style-buttons" type="button">Пополнить</button> 
+                </a>
                 <a href="{{ settings.SITE_URL }}/profile/">
                     <button id="button" class="style-buttons" type="button">{{ user.username }}</button> 
                 </a>
