@@ -30,6 +30,7 @@ h1{
 .style-header p{
     color: #FFFFFF;
     font-size: 1.5rem;
+    font-weight: 700;
 }
 
 .style-header p b{
@@ -56,4 +57,16 @@ h1{
 .home_link{
     text-decoration : none;
     width: 100%;
+}
+
+.userbar__user{
+    border-radius: 10px;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+@media not all and (hover: none) and (pointer:coarse) {
+    .userbar__user:hover {
+        border-color: #f4ea60;
+    }
 }

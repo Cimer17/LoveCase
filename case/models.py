@@ -1,32 +1,6 @@
 from django.db import models
 from django_resized import ResizedImageField
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-from django.utils import timezone
-
-
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        UserProfile.objects.create(user=instance, keys_count=0)
-
-class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', verbose_name='Пользователь')
-    keys_count = models.IntegerField(default=0, verbose_name='Количество ключей')
-
-    def add_key(self, count=1):
-        self.keys_count += count
-        self.save()
-
-    def remove_key(self, count=1):
-        if self.keys_count > 0:
-            self.keys_count -= count
-            self.save()
-
-    class Meta:
-        verbose_name = 'Ключ'
-        verbose_name_plural = 'Ключи'
 
 class Category(models.Model):
     name = models.CharField(max_length=100, verbose_name='Название категории')
@@ -93,39 +67,5 @@ class UserItem(models.Model):
         return f"{self.user.username} - {self.item.name}"
     
     class Meta:
-        verbose_name = 'Вывод пользователей'
-        verbose_name_plural = 'Выводы пользователей'
-
-
-class Game(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Пользователь, сделавший выбор
-    chosen_item_id = models.IntegerField()  # Идентификатор выбранного предмета
-    case_id = models.IntegerField()  # Идентификатор кейса
-    hash_value = models.CharField(max_length=32)  # Хеш для проверки справедливости
-
-    def __str__(self):
-        return f"Игра пользователя {self.user.username}, Выпавший предмет: {self.chosen_item_id}, ID кейса: {self.case_id}"
-    
-
-    class Meta:
-        verbose_name = 'Игра'
-        verbose_name_plural = 'Игры'
-
-
-class PromoCode(models.Model):
-    code = models.CharField(max_length=20, unique=True, verbose_name='Промокод')
-    keys_count = models.IntegerField(verbose_name='Количество ключей')
-    is_single_use = models.BooleanField(default=True, verbose_name='Одноразовый промокод')
-    activations_left = models.IntegerField(default=1, verbose_name='Количество активаций')
-    class Meta:
-        verbose_name = 'Промокод'
-        verbose_name_plural = 'Промкоды'
-    def __str__(self):
-        return self.code
-    
-class UsedPromoCode(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='used_promo_codes', verbose_name='Пользователь')
-    promo_code = models.ForeignKey(PromoCode, on_delete=models.CASCADE, verbose_name='Использованный промокод')
-
-    class Meta:
-        unique_together = ('user', 'promo_code')
+        verbose_name = 'Live лента'
+        verbose_name_plural = 'Live лента'
