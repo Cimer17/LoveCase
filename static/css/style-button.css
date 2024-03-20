@@ -33,18 +33,18 @@
     pointer-events: none;
 }
 
-.styles-button:hover {
+/* .styles-button:hover {
     color: white;
     background-color: transparent;
     border: 3px solid #f4ea60;
     box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
     transform: translateY(-2px);
-}
+} */
 
-.styles-button:active {
+/* .styles-button:active {
     box-shadow: none;
     transform: translateY(0);
-}
+} */
 
 /* /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 

@@ -60,9 +60,14 @@ class Item(models.Model):
 class UserItem(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
     item = models.ForeignKey(Item, on_delete=models.CASCADE, verbose_name='Предмет')
+    case = models.ForeignKey(Case, on_delete=models.CASCADE, verbose_name='Кейс')
     conclusion = models.BooleanField(default=False, verbose_name='Выведено')
-    received_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата получения') 
-
+    received_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата получения')
+    client_seed = models.CharField(max_length=255, verbose_name='Client Seed')
+    server_seed = models.CharField(max_length=255, verbose_name='Server Seed')
+    nonce = models.IntegerField(default=0, verbose_name='Nonce')
+    hash_seed = models.CharField(max_length=255, verbose_name='hash')
+    
     def __str__(self):
         return f"{self.user.username} - {self.item.name}"
     

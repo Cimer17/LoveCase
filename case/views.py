@@ -1,14 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from .models import *
+from django.urls import reverse
 from case.urls import *
 from django.db.models import Sum
-from django.urls import reverse
 from telegram import *
 from profiles.models import UserProfile
-from games.models import Game
+from .hash import *
 import random
-import hashlib
 
 def index(request):
     cases_popular = Case.objects.order_by('-id')[:6]
@@ -47,6 +46,7 @@ def choose_item(request):
     id = request.GET.get("id")
     # Получаем все элементы с количеством больше 0
     items = Item.objects.filter(cases=id).filter(quantity__gt=0)
+    case = get_object_or_404(Case, pk=id)
     if not items.exists():
         # Если предметы закончились, возвращаем соответствующий ответ
         return JsonResponse({'end': True})
@@ -64,15 +64,26 @@ def choose_item(request):
             # Уменьшаем количество предметов у победителя
             chosen_item.quantity -= 1 
             chosen_item.save()
-            UserItem.objects.create(user=user, item=chosen_item)
             user_profile = UserProfile.objects.get(user=user)
             user_profile.remove_key()
-            # Хешируем важные данные, связанные с выбором элемента, для обеспечения "доказуемой справедливости"
-            hash_data = f"{user.username}-{chosen_item.id}-{id}".encode()
-            hash_result = hashlib.md5(hash_data).hexdigest()
-            Game.objects.create(user=user, chosen_item_id=chosen_item.id, case_id=id, hash_value=hash_result)
-            link_hash = f'{reverse("index")}gethash/?hash={hash_result}&username={user}&chosen_item_id={chosen_item.id}&case_id={id}'
+            
+            
+            server_seed = get_server_seed()
+            client_seed = generate_client_seed()
+            nonce = get_nonce()
+            hash_result = calculate_hash(server_seed, client_seed, nonce)
+            UserItem.objects.create(
+                user=user,
+                item=chosen_item,
+                case=case,
+                client_seed=client_seed,
+                server_seed=server_seed,
+                nonce=nonce,
+                hash_seed = hash_result,
+            )
+            link_hash = f'{reverse("index")}gethash/?hash={hash_result}'
             break
+
     if chosen_item:
         # Возвращаем победителя, все элементы и хеш данных
         items = Item.objects.filter(cases=id)
@@ -80,6 +91,35 @@ def choose_item(request):
         return JsonResponse({'winner': {'name': chosen_item.name, 'img_url': chosen_item.img.url, 'rare' : chosen_item.rare}, 'items': serialized_items, 'hash': hash_result, 'link_hash' : link_hash})
     else:
         return JsonResponse({'error': 'Failed to choose item'})
+
+def gethash(request):
+    return render(request, 'main/hash.html')
+
+def provably_fair(request):
+    if request.method == 'GET':
+        hash_value = request.GET.get('hash')
+        user_items = UserItem.objects.filter(hash_seed=hash_value)
+        if user_items.exists():
+            user_item = user_items.first()  # Получаем первый объект UserItem из QuerySet
+            user_info = user_item.user.username  # Получаем имя пользователя
+            item_info = user_item.item.name  # Получаем название предмета
+            case_info = user_item.case.name  # Получаем название кейса
+            client_seed_info = user_item.client_seed 
+            server_seed_info = user_item.server_seed 
+            nonce_info = user_item.nonce
+            return JsonResponse({
+                'user': user_info,
+                'item': item_info,
+                'case': case_info,
+                'client_seed': client_seed_info,
+                'server_seed': server_seed_info,
+                'nonce': nonce_info
+            })
+        else:
+            return JsonResponse({'message': 'Об этом хэше нет информации...'})
+    else:
+        return JsonResponse({'error': 'Не все параметры переданы'})
+
 
 
 def get_items(request):
