@@ -4,9 +4,8 @@
         <a href="/" class="home_link"><p><b>big</b>Jackpot</p></a>
         <div class="button_style style_1">
             {% if request.user.is_authenticated %}
-                <p class="style_key">{{ keys_count }} 🔑</p>
                 <a href="{{ settings.SITE_URL }}/paymants/">
-                    <button id="button" class="style-buttons" type="button">Пополнить</button> 
+                    <button id="button" class="style-buttons style_key" type="button">{{ keys_count }} 🔑</button> 
                 </a>
                 <a href="{% url 'profile' user.id %}" class="userbar__user">
                     <img src="{{ user.profile.image_profiles.url }}" class="rounded" width="50" height="50">
