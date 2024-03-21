@@ -24,14 +24,31 @@ body {
   border-radius: 10px;
   margin-top: 100px;
 }
+
 .app .pointer {
+  margin-top: 5px;
   position: absolute;
+  padding-top: 9px;
+  padding-left: 6px;
   z-index: 1;
   left: 50%;
   transform: translate3d(-50%, -25px, 0);
-  height: 50px;
+  height: 100%;
+  width: 100%;
+  max-width: 480px;
+  max-height: 285px;
   filter: drop-shadow(0 0 20px rgba(230, 174, 174, 0.3));
 }
+
+/* .pointer::before{
+  z-index: 100 !important;
+  left: 50%;
+  transform: translate3d(-50%, -25px, 0);
+  filter: drop-shadow(0 0 20px rgba(230, 174, 174, 0.3));
+  height: 350px !important;
+  width: 100% !important;
+} */
+
 .app .scope {
   overflow: hidden;
 }
