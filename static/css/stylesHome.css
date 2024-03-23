@@ -87,6 +87,10 @@
 .img-Case{
     margin: 10px auto;
     display: flex;
+    width: 100%;
+    max-width: 250px;
+    height: 100%;
+    max-height: 250px;
 }
 
 .caseContainer{
