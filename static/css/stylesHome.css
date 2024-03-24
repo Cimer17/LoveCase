@@ -102,6 +102,22 @@
         flex-wrap: wrap;
 }
 
+.caseContainer a{
+    text-decoration: none;
+}
+
+.caseContainer a:hover{
+    .case_btn{
+        background: #12141f00;
+        border: 3px solid #ffd041;
+        color: #fff;
+    }
+}
+
+.case_btn{
+    width: 50% !important;
+}
+
 .infrormation{
     display: flex;
     margin: 0 0 60px;

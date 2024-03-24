@@ -29,17 +29,17 @@
                 </div>
                 <div class="caseContainer">
                     {% for case in cases %}
+                    <a href="/case/{{ case.id }}">
                     <div class="box-Case">
                         <div class="img-Case">
                             <img class="img_case" src="{{ case.img_certificates.url }}" alt="{{ case.name }}">
                         </div>
                         <p>{{ case.name }}</p>
                         <div class="button_style">
-                            <a href="/case/{{ case.id }}">
-                            <input class="styles-button" type="button" value="Открыть">  
-                            </a>                       
+                            <input class="styles-button case_btn" type="button" value="Открыть">                          
                         </div>
                     </div>
+                </a> 
                     {% endfor %}
                 </div>
                 {% for category in categories %}
@@ -49,17 +49,17 @@
                 </div>
                 <div class="caseContainer">
                     {% for case in category.cases.all %}
+                    <a href="/case/{{ case.id }}">
                     <div class="box-Case">
                         <div class="img-Case">
                             <img class="img_case" src="{{ case.img_certificates.url }}" alt="{{ case.name }}">
                         </div>
                         <p>{{ case.name }}</p>
                         <div class="button_style">
-                            <a href="/case/{{ case.id }}">
-                                <input class="styles-button" type="button" value="Открыть">  
-                            </a>                       
+                                <input class="styles-button case_btn" type="button" value="Открыть">                        
                         </div>
                     </div>
+                </a>
                     {% endfor %}
                 </div>
                 {% endfor %}
