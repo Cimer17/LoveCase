@@ -1,22 +1,32 @@
+:root{
+    --pixel-color-header: rgba(13, 16, 26, 0.96);
+    --pixel-color-yelow: #FFD041;
+}
+
 .styles-main{
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
+    max-width: 100%;
+    height: 100%;
+    width: 100%;
 }
 
 .gif-box{
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 0 2vw;
+    padding: 0 4vw;
+    align-items: center; 
     height: 500px;
-    background-image: url("/media/bigfuut.webp");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+}
+
+.background-poster{
+    position: absolute;
+    width: 100%;
+    min-width: 50%;
+    height: 500px;
+    object-fit: cover;
 }
 
 .gif-box p{
@@ -24,6 +34,15 @@
     font-weight: 700;
     color: #FFFFFF;
     text-transform: uppercase;
+    position: relative;
+}
+
+.open-case{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 .button-style{
@@ -40,15 +59,20 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 4em;
+    padding: 4em 0;
     background: linear-gradient(0deg,#28274d,#080726);
+    min-height: 100vh;
+    max-width: 100%;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
 }
 
 .style-text-case1{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 1em;
+    padding: 4em 0;
 }
 
 .style-text-case1 p{
@@ -94,12 +118,12 @@
 }
 
 .caseContainer{
+    width: 100%;
+    height: 100%;
+    max-width: 1700px;
     display: flex;
-        width: 100%;
-        height: 100%;
-        max-width: 1699px;
-        display: flex;
-        flex-wrap: wrap;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
 .caseContainer a{
@@ -145,7 +169,7 @@
 }
 
 .link a:nth-child(1){
-    color: rgba(129, 32, 255, 1);
+    color: var(--pixel-color-yelow);
 }
 
 .link a:nth-child(3){
@@ -162,7 +186,7 @@
 }
 
 .inf-key p:nth-child(1){
-    font-size: 1.875rem;
+    font-size: 2rem;
     margin: 0;
     font-weight: 700;
     color: #FFFFFF;
@@ -183,7 +207,7 @@
 }
 
 .information-case{
-    background-image: url("/media/fon_woman.svg");
+    background: var(--pixel-color-header);
     background-size: auto;
     object-fit: cover;
 }
