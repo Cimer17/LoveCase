@@ -46,10 +46,19 @@ def choose_item(request):
     id = request.GET.get("id")
     # Получаем все элементы с количеством больше 0
     items = Item.objects.filter(cases=id).filter(quantity__gt=0)
+    user_profile = UserProfile.objects.get(user=user)
     case = get_object_or_404(Case, pk=id)
+    
+    if user_profile.keys_count <= 0:
+        return JsonResponse({'error': 'Недостаточно ключей для открытия кейса!'})
+    
+    if items.count() == 0:
+        return JsonResponse({'error': 'В кейсе закончились предметы!'})    
+    
     if not items.exists():
         # Если предметы закончились, возвращаем соответствующий ответ
         return JsonResponse({'end': True})
+    
     # Рассчитываем общий шанс для выбора элемента
     total_chance = sum(item.chance for item in items)
     # Генерируем случайное число в диапазоне от 0 до общего шанса
@@ -64,7 +73,6 @@ def choose_item(request):
             # Уменьшаем количество предметов у победителя
             chosen_item.quantity -= 1 
             chosen_item.save()
-            user_profile = UserProfile.objects.get(user=user)
             user_profile.remove_key()
             
             
@@ -88,7 +96,7 @@ def choose_item(request):
         # Возвращаем победителя, все элементы и хеш данных
         items = Item.objects.filter(cases=id)
         serialized_items = [{'name': item.name, 'img_url': item.img.url, 'chance': item.chance, 'rare' : item.rare } for item in items]
-        return JsonResponse({'winner': {'name': chosen_item.name, 'img_url': chosen_item.img.url, 'rare' : chosen_item.rare}, 'items': serialized_items, 'hash': hash_result, 'link_hash' : link_hash})
+        return JsonResponse({'winner': {'name': chosen_item.name, 'img_url': chosen_item.img.url, 'rare' : chosen_item.rare}, 'items': serialized_items, 'hash': hash_result, 'link_hash' : link_hash, 'keys_count': user_profile.keys_count})
     else:
         return JsonResponse({'error': 'Failed to choose item'})
 

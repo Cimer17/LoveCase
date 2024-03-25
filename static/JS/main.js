@@ -50,16 +50,26 @@ function loadItems() {
 }
 
 function start() {
-    var audio = document.getElementById("audio_open");
-    var game = document.getElementById("audio_open_start");
-    var win = document.getElementById('audio_win');
-    audio.play();
-    game.play();
+
     var xhr = new XMLHttpRequest();
     xhr.open('GET', `/choose_item?id=${get_id_case()}`, true);
 
     xhr.onload = function() {
         if (xhr.status >= 200 && xhr.status < 400) {
+            var data = JSON.parse(xhr.responseText);
+
+            if ('error' in data) {
+                swal("Ошибка", data.error, "error").then(function() {
+                    window.location.reload();
+                });
+                return;
+            }
+
+            var audio = document.getElementById("audio_open");
+            var game = document.getElementById("audio_open_start");
+            var win = document.getElementById('audio_win');
+            audio.play();
+            game.play();
             var data = JSON.parse(xhr.responseText);
             var winnerIndex = 15; // Индекс победителя
             var items = data.items;
@@ -155,7 +165,8 @@ function start() {
 
                 list.addEventListener('transitionend', transitionEndHandler, { once: true });
             }, 400);
-
+            var keysButton = document.getElementById("button");
+            keysButton.textContent = data.keys_count + ' 🔑';
         } else {
             console.error('HTTP error: ' + xhr.status);
         }

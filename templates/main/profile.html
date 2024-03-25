@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/style-button.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/stylesHome.css' %}">
     <script defer src="{% static 'JS/telegram.js' %}"></script>
+    <script src="{% static 'JS/sweetalert.min.js' %}"></script>
     <title>Профиль</title>
 </head>
 <body>
@@ -44,7 +45,7 @@
                 </div>                 
                </div>
                <div class="button mt-2 d-flex flex-row align-items-center">
-                <button id="sendMessageBtn" class="btn btn-sm btn-outline-primary w-100">Вывод</button>
+                <button id="sendMessageBtn" class="btn btn-sm btn-outline-primary w-100 vivod">Вывод</button>
                 <button class="btn btn-sm btn-primary w-100 ml-2" onclick="location.href='{% url 'logout' %}?next=/profile'">Выйти</button>                  
                </div>
             </div>

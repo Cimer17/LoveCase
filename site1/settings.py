@@ -26,10 +26,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'sweetify',
     'case',
     'promocode',
     'profiles',
 ]
+
+SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

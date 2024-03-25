@@ -12,17 +12,17 @@ document.getElementById("sendMessageBtn").addEventListener("click", function() {
         if (xhr.status >= 200 && xhr.status < 300) {
             var responseData = JSON.parse(xhr.responseText);
             if ("error" in responseData) {
-                alert(responseData.error);
+                swal("Ошибка", responseData.error, "error");
             } else {
-                alert(responseData.message); // Вывод успешного сообщения
+                swal("Успешно", responseData.message, "success");
             }
         } else {
-            alert("Ошибка вывода!");
+            swal("Ошибка", "Ошибка вывода!", "error");
         }
     };
 
     xhr.onerror = function() {
-        alert("Ошибка вывода!");
+        swal("Ошибка", "Ошибка вывода!", "error");
     };
     xhr.send();
 });

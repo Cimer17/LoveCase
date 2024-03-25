@@ -10,6 +10,7 @@
     <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/style-button.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/stylesHome.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}"> -->
+    <script src="{% static 'JS/sweetalert2@11.js' %}"></script>
 </head>
 <body>
   {% include 'main/module/header.html' %}
@@ -24,5 +25,7 @@
     {% endif %}
   </div>
   {% include 'main/module/footer.html' %}
+  {% load sweetify %}
+  {% sweetify %}
 </body>
 </html>
