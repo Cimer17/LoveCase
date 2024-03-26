@@ -1,6 +1,7 @@
 .venv/*
 my_venv/*
-
+bot.py
+telebot/*
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
