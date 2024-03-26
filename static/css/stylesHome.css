@@ -1,8 +1,3 @@
-:root{
-    --pixel-color-header: rgba(13, 16, 26, 0.96);
-    --pixel-color-yelow: #FFD041;
-}
-
 .styles-main{
     display: flex;
     flex-direction: column;
@@ -140,76 +135,6 @@
 
 .case_btn{
     width: 50% !important;
-}
-
-.infrormation{
-    display: flex;
-    margin: 0 0 60px;
-}
-
-.infrormation .call:nth-child(2){
-    margin-left: 5em;
-}
-
-.call{
-    display: flex;
-    align-items: center;
-}
-
-.link{
-    display: flex;
-    flex-direction: column;
-}
-
-.link > a{
-    margin: 6px;
-    text-decoration: none;
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.6);
-}
-
-.link a:nth-child(1){
-    color: var(--pixel-color-yelow);
-}
-
-.link a:nth-child(3){
-    text-transform: uppercase;
-}
-
-.key-img{
-    max-width: 60px;
-    width: 100%;
-}
-
-.inf-key{
-    padding: 0 20px;
-}
-
-.inf-key p:nth-child(1){
-    font-size: 2rem;
-    margin: 0;
-    font-weight: 700;
-    color: #FFFFFF;
-}
-
-.inf-key p:nth-child(2){
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.6);
-    margin: 0;
-}
-
-.key-img img{
-    width: 100%;
-}
-
-.context{
-    padding: 6em 5em;
-}
-
-.information-case{
-    background: var(--pixel-color-header);
-    background-size: auto;
-    object-fit: cover;
 }
 
 .img_case{
