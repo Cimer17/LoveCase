@@ -22,6 +22,22 @@
     src: url('/static/font/TTFirsNeue-ExtraBold.ttf') format('truetype');
 }
 
+:root{
+    --pixel-color-header: rgba(13, 16, 26, 0.96);
+    --pixel-color-yelow: #FFD041;
+    --pixel-color-white: white;
+    --background-color-paymants: #12141F;
+    --style-color-form: #1C1D27;
+    --glow-color: hsl(186 100% 69%);
+    --text-size-16: 1rem;
+    --text-size-20: 1.25rem;
+    --text-size-24: 1.5rem;
+    --text-size-30: 1.875rem;
+    --text-size-32: 2rem;
+    --text-size-34: 2.125rem;
+    --text-size-36: 2.25rem;
+}
+
 html *{
     font-family: 'TT Firs Neue', sans-serif;
 }
@@ -63,6 +79,7 @@ h1{
     color: #FFFFFF;
     font-size: 1.5rem;
     font-weight: 700;
+    margin: 0;
 }
 
 .style-header p b{

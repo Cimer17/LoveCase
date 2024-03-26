@@ -10,6 +10,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/footer.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/pagination.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/rare.css' %}">
     <link rel="stylesheet" href="{% static 'case/style.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style-button.css' %}">
@@ -20,69 +22,71 @@
 </head>
 <body>
     {% include 'main/module/header.html' %}
-    <div class="container mt-5 d-flex justify-content-center">
-        <div class="card p-3">
-            <div class="d-flex align-items-center">
-                <div class="image">
-            <img src="{{ user.profile.image_profiles.url }}" class="rounded" width="155" >
-            </div>
-            <div class="ml-3 w-100">    
-               <h4 class="mb-0 mt-0" style="color: black !important;">{{ user.username }}</h4>
-               <span class='pouring' style="color: black !important;" >Безумец</span>
-               <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
-                <div class="d-flex flex-column">
-                    <span class="articles">Кейсов</span>
-                    <span class="number1">{{ user_items_count }}</span>                   
+    <main class="styles-main">
+        <div class="container mt-5 d-flex justify-content-center">
+            <div class="card p-3">
+                <div class="d-flex align-items-center">
+                    <div class="image">
+                <img src="{{ user.profile.image_profiles.url }}" class="rounded" width="155" >
                 </div>
-                <div class="d-flex flex-column">
+                <div class="ml-3 w-100">    
+                <h4 class="mb-0 mt-0" style="color: black !important;">{{ user.username }}</h4>
+                <span class='pouring' style="color: black !important;" >Безумец</span>
+                <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
+                    <div class="d-flex flex-column">
+                        <span class="articles">Кейсов</span>
+                        <span class="number1">{{ user_items_count }}</span>                   
+                    </div>
+                    <div class="d-flex flex-column">
 
-                    <span class="followers">Выводов</span>
-                    <span class="number2">{{ items_conclusion }}</span>                   
+                        <span class="followers">Выводов</span>
+                        <span class="number2">{{ items_conclusion }}</span>                   
+                    </div>
+                    <div class="d-flex flex-column">
+                        <span class="rating">Возможно вывести</span>
+                        <span class="number3">{{ total }}</span>                  
+                    </div>                 
                 </div>
-                <div class="d-flex flex-column">
-                    <span class="rating">Возможно вывести</span>
-                    <span class="number3">{{ total }}</span>                  
-                </div>                 
-               </div>
-               <div class="button mt-2 d-flex flex-row align-items-center">
-                <button id="sendMessageBtn" class="btn btn-sm btn-outline-primary w-100 vivod">Вывод</button>
-                <button class="btn btn-sm btn-primary w-100 ml-2" onclick="location.href='{% url 'logout' %}?next=/profile'">Выйти</button>                  
-               </div>
-            </div>
-            </div>
-        </div>  
-     </div>
-     <div class="info_case">
-        <h1>Выпавшие предметы</h1>
-        <div class="list_items_mini">
-            <ul class="list_new_items">
-                {% for item in page_obj %}
-                    <li data-item="{{ item.name }}" class="list__item gradient_{{ item.rare }}">
-                        <div class="img_items">
-                            <img class='img_card' src="{{ item.img.url }}" alt="{{ item.name }}">
-                        </div>
-                        <div class="title_items">
-                            <p>{{ item.name }}</p>
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
+                <div class="button mt-2 d-flex flex-row align-items-center">
+                    <button id="sendMessageBtn" class="btn btn-sm btn-outline-primary w-100 vivod">Вывод</button>
+                    <button class="btn btn-sm btn-primary w-100 ml-2" onclick="location.href='{% url 'logout' %}?next=/profile'">Выйти</button>                  
+                </div>
+                </div>
+                </div>
+            </div>  
         </div>
-    </div>
-    <div class="pagination">
-        {% if page_obj.has_previous %}
-        <a class="previous-a" href="?page={{ page_obj.previous_page_number }}"></a>
-        {% endif %}
-        {% for i in page_obj.paginator.page_range %}
-        {% if page_obj.number == i %}
-        <span class="current-page">{{ i }}</span>
-        {% elif i > page_obj.number|add:"-3" and i < page_obj.number|add:"3" %} <a href="?page={{ i }}">{{ i }}</a>
+        <div class="info_case">
+            <h1>Выпавшие предметы</h1>
+            <div class="list_items_mini">
+                <ul class="list_new_items">
+                    {% for item in page_obj %}
+                        <li data-item="{{ item.name }}" class="list__item gradient_{{ item.rare }}">
+                            <div class="img_items">
+                                <img class='img_card' src="{{ item.img.url }}" alt="{{ item.name }}">
+                            </div>
+                            <div class="title_items">
+                                <p>{{ item.name }}</p>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+            <a class="previous-a" href="?page={{ page_obj.previous_page_number }}"></a>
             {% endif %}
-            {% endfor %}
-            {% if page_obj.has_next %}
-            <a class="next-a" href="?page={{ page_obj.next_page_number }}"></a>
-            {% endif %}
-    </div>
+            {% for i in page_obj.paginator.page_range %}
+            {% if page_obj.number == i %}
+            <span class="current-page">{{ i }}</span>
+            {% elif i > page_obj.number|add:"-3" and i < page_obj.number|add:"3" %} <a href="?page={{ i }}">{{ i }}</a>
+                {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                <a class="next-a" href="?page={{ page_obj.next_page_number }}"></a>
+                {% endif %}
+        </div>
+    </main>
     {% include 'main/module/footer.html' %}
 </body>
 </html>
