@@ -207,7 +207,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     border: 1px solid #76b852;
     cursor: pointer;
     padding: 0.9em;
-    -webkit-appearance: none;
+    --webkit-appearance: none;
     width: 100%;
     margin: 2em 0;
     letter-spacing: 4px;

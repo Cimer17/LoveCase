@@ -1,5 +1,8 @@
+.styles-main{
+	justify-content: center;
+}
+
 body{
-    
     background-color:#B3E5FC;
     border-radius: 10px;
     background-color:#212529 !important;
@@ -17,9 +20,7 @@ body{
 
 
 .stats{
-
-      background: #f2f5f8 !important;
-
+    background: #f2f5f8 !important;
     color: #000 !important;
 }
 .articles{

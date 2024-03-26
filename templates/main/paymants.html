@@ -7,6 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/paymants.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style-button.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/footer.css' %}">
     <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/style-button.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/stylesHome.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}"> -->
@@ -15,14 +19,16 @@
 </head>
 <body>
   {% include 'main/module/header.html' %}
-    <div class="paymants_form">
-    <form method="post">
+  <div class="paymants_form">
+    <h2>пополнение</h2>
+    <form class="form_style" method="post">
       {% csrf_token %}
       {{ form.as_p }}
-      <button type="submit">Активировать</button>
+      <button class="activ-button-style" type="submit">
+        <span class='glowing-txt'>А<span class='faulty-letter'>к</span>тивировать</span></button>
     </form>
     {% if error %}
-      <p>{{ error }}</p>
+      <p class="error-p">{{ error }}!</p>
     {% endif %}
   </div>
   {% include 'main/module/footer.html' %}
