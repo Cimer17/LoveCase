@@ -65,23 +65,10 @@ TEMPLATES = [
 WSGI_APPLICATION = 'site1.wsgi.application'
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cf13942_uupc4',
-        'HOST': 'localhost',
-        # 'HOST': 'vh424.timeweb.ru',
-        'PORT': '3306',
-        'USER': 'cf13942_uupc4',
-        'PASSWORD': 'bdfy17cbvrf',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
