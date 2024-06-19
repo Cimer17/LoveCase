@@ -52,7 +52,7 @@ $ pip install -r requirements.txt
 
 Если у вас есть вопросы или предложения, пожалуйста, свяжитесь с нами:
 
-- Автор: [Cimer17](https://github.com/Cimer17)
+- Авторы: [Cimer17](https://github.com/Cimer17), [andrtei](https://github.com/andrtei)
 
 ---
 
